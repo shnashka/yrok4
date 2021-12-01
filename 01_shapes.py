@@ -2,32 +2,35 @@
 
 import simple_draw as sd
 
-# Часть 1.
-# Написать функции рисования равносторонних геометрических фигур:
-# - треугольника
-# - квадрата
-# - пятиугольника
-# - шестиугольника
-# Все функции должны принимать 3 параметра:
-# - точка начала рисования
-# - угол наклона
-# - длина стороны
-#
-# Использование копи-пасты - обязательно! Даже тем кто уже знает про её пагубность. Для тренировки.
-# Как работает копипаста:
-#   - одну функцию написали,
-#   - копипастим её, меняем название, чуть подправляем код,
-#   - копипастим её, меняем название, чуть подправляем код,
-#   - и так далее.
-# В итоге должен получиться ПОЧТИ одинаковый код в каждой функции
+sd.resolution = (700, 700)
 
-# Пригодятся функции
-# sd.get_point()
-# sd.get_vector()
-# sd.line()
-# Результат решения см lesson_004/results/exercise_01_shapes.jpg
 
-# TODO здесь ваш код
+def triangle(point, angle, side_len):
+    vector_1 = sd.get_vector(start_point=point, angle=angle, length=side_len, width=1)
+    vector_1.draw()
+    vector_2 = sd.get_vector(start_point=vector_1.end_point, angle=angle + 120, length=side_len, width=1)
+    vector_2.draw()
+    vector_3 = sd.get_vector(start_point=vector_2.end_point, angle=angle + 240, length=side_len, width=1)
+    vector_3.draw()
+
+
+point_0 = sd.get_point(101, 101)
+triangle(point_0, 0, 100)
+
+
+def square(point, angle, side_len):
+    vector_1 = sd.get_vector(start_point=point, angle=angle, length=side_len, width=1)
+    vector_1.draw()
+    vector_2 = sd.get_vector(start_point=vector_1.end_point, angle=angle + 90, length=side_len, width=1)
+    vector_2.draw()
+    vector_3 = sd.get_vector(start_point=vector_2.end_point, angle=angle + 180, length=side_len, width=1)
+    vector_3.draw()
+    vector_4 = sd.get_vector(start_point=vector_3.end_point, angle=angle + 270, length=side_len, width=1)
+    vector_4.draw()
+
+
+point_0 = sd.get_point(200, 200)
+square(point_0, 0, 50)
 
 # Часть 1-бис.
 # Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
