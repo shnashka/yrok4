@@ -15,7 +15,7 @@ def triangle(point, angle, side_len):
 
 
 point_0 = sd.get_point(101, 101)
-triangle(point_0, 0, 100)
+triangle(point_0, 0, 40)
 
 
 def square(point, angle, side_len):
@@ -29,31 +29,59 @@ def square(point, angle, side_len):
     vector_4.draw()
 
 
-point_0 = sd.get_point(200, 200)
+point_0 = sd.get_point(100, 200)
 square(point_0, 0, 50)
 
-# Часть 1-бис.
-# Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
-# Скажем, связывать точки не линиями, а дугами. Или двойными линиями. Или рисовать круги в угловых точках. Или...
-# А если таких функций не 4, а 44?
 
-# Часть 2 (делается после зачета первой части)
-#
-# Надо сформировать функцию, параметризированную в местах где была "небольшая правка".
-# Это называется "Выделить общую часть алгоритма в отдельную функцию"
-# Потом надо изменить функции рисования конкретных фигур - вызывать общую функцию вместо "почти" одинакового кода.
-#
-# В итоге должно получиться:
-#   - одна общая функция со множеством параметров,
-#   - все функции отрисовки треугольника/квадрата/етс берут 3 параметра и внутри себя ВЫЗЫВАЮТ общую функцию.
-#
-# Не забудте в этой общей функции придумать, как устранить разрыв
-#   в начальной/конечной точках рисуемой фигуры (если он есть)
+def pentagon(point, angle, side_len):
+    vector_1 = sd.get_vector(start_point=point, angle=angle, length=side_len, width=1)
+    vector_1.draw()
+    vector_2 = sd.get_vector(start_point=vector_1.end_point, angle=angle + 72 * 1, length=side_len, width=1)
+    vector_2.draw()
+    vector_3 = sd.get_vector(start_point=vector_2.end_point, angle=angle + 72 * 2, length=side_len, width=1)
+    vector_3.draw()
+    vector_4 = sd.get_vector(start_point=vector_3.end_point, angle=angle + 72 * 3, length=side_len, width=1)
+    vector_4.draw()
+    vector_5 = sd.get_vector(start_point=vector_4.end_point, angle=angle + 72 * 4, length=side_len, width=1)
+    vector_5.draw()
 
-# Часть 2-бис.
-# А теперь - сколько надо работы что бы внести изменения в код? Выгода на лицо :)
-# Поэтому среди программистов есть принцип D.R.Y. https://clck.ru/GEsA9
-# Будьте ленивыми, не используйте копи-пасту!
 
+point_0 = sd.get_point(100, 300)
+pentagon(point_0, 0, 60)
+
+
+def octagon(point, angle, side_len):
+    vector_1 = sd.get_vector(start_point=point, angle=angle, length=side_len, width=1)
+    vector_1.draw()
+    vector_2 = sd.get_vector(start_point=vector_1.end_point, angle=angle + 60 * 1, length=side_len, width=1)
+    vector_2.draw()
+    vector_3 = sd.get_vector(start_point=vector_2.end_point, angle=angle + 60 * 2, length=side_len, width=1)
+    vector_3.draw()
+    vector_4 = sd.get_vector(start_point=vector_3.end_point, angle=angle + 60 * 3, length=side_len, width=1)
+    vector_4.draw()
+    vector_5 = sd.get_vector(start_point=vector_4.end_point, angle=angle + 60 * 4, length=side_len, width=1)
+    vector_5.draw()
+    vector_6 = sd.get_vector(start_point=vector_5.end_point, angle=angle + 60 * 5, length=side_len, width=1)
+    vector_6.draw()
+
+
+point_0 = sd.get_point(100, 400)
+octagon(point_0, 0, 70)
+
+
+def figure(start, angle, length):
+    side = sd.get_vector(start_point=start, angle=angle, length=length, width=1)
+    side.draw()
+    return side.end_point
+
+
+def triangle_2(_point, _angle, _len):
+    next_point = _point
+    for i in range(3):
+        next_point = figure(start=next_point, angle=_angle + 360 / 3 * i, length=_len)
+
+
+point_0 = sd.get_point(400, 100)
+triangle_2(point_0, 0, 80)
 
 sd.pause()
