@@ -84,4 +84,34 @@ def triangle_2(_point, _angle, _len):
 point_0 = sd.get_point(400, 100)
 triangle_2(point_0, 0, 80)
 
+
+def square_2(_point, _angle, _len):
+    next_point = _point
+    for i in range(4):
+        next_point = figure(start=next_point, angle=_angle + 360 / 4 * i, length=_len)
+
+
+point_0 = sd.get_point(400, 200)
+square_2(point_0, 0, 80)
+
+
+def pentagon_2(_point, _angle, _len):
+    next_point = _point
+    for i in range(5):
+        next_point = figure(start=next_point, angle=_angle + 360 / 5 * i, length=_len)
+
+
+point_0 = sd.get_point(400, 300)
+pentagon_2(point_0, 0, 80)
+
+
+def octagon_2(_point, _angle, _len):
+    next_point = _point
+    for i in range(6):
+        next_point = figure(start=next_point, angle=_angle + 360 / 6 * i, length=_len)
+
+
+point_0 = sd.get_point(400, 500)
+octagon_2(point_0, 0, 80)
+
 sd.pause()
