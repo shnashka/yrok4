@@ -114,4 +114,13 @@ def octagon_2(_point, _angle, _len):
 point_0 = sd.get_point(400, 500)
 octagon_2(point_0, 0, 80)
 
+# def tr_2(_point, _angle, _len):
+#     next_point = _point
+#     for i in range(3):
+#         next_point = figure(next_point, _angle + 360 / 3 * i,_len)
+#
+#
+# point_0 = sd.get_point(500, 400)
+# tr_2(point_0, 0, 80)
+
 sd.pause()

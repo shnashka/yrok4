@@ -1,19 +1,6 @@
 # -*- coding: utf-8 -*-
 import simple_draw as sd
-
-# Добавить цвет в функции рисования геом. фигур. из упр lesson_004/01_shapes.py
-# (код функций скопировать сюда и изменить)
-# Запросить у пользователя цвет фигуры посредством выбора из существующих:
-#   вывести список всех цветов с номерами и ждать ввода номера желаемого цвета.
-# Потом нарисовать все фигуры этим цветом
-
-# Пригодятся функции
-# sd.get_point()
-# sd.line()
-# sd.get_vector()
-# и константы COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_CYAN, COLOR_BLUE, COLOR_PURPLE
-# Результат решения см lesson_004/results/exercise_02_global_color.jpg
-
+sd.resolution = (700, 700)
 colors = {
     1: sd.COLOR_RED,
     2: sd.COLOR_ORANGE,
@@ -32,48 +19,40 @@ colors_name = {
     6: 'Толерантный',
     7: 'Белый'
 }
-
-
-def figure(start, angle, length):
+def figure(start, angle, length, color):
     side = sd.get_vector(start_point=start, angle=angle, length=length, width=1)
-    side.draw()
+    side.draw(color=color)
+
     return side.end_point
 
 
-def triangle_2(_point, _angle, _len):
+def triangle_2(_point, _angle, _len, _color):
     next_point = _point
     for i in range(3):
-        next_point = figure(start=next_point, angle=_angle + 360 / 3 * i, length=_len)
-
-
-# point_0 = sd.get_point(400, 100)
-# triangle_2(point_0, 0, 80)
-
-
-def square_2(_point, _angle, _len):
+        next_point = figure(start=next_point, angle=_angle + 360 / 3 * i, length=_len, color=_color)
+def square_2(_point, _angle, _len, _color):
     next_point = _point
     for i in range(4):
-        next_point = figure(start=next_point, angle=_angle + 360 / 4 * i, length=_len)
+        next_point = figure(start=next_point, angle=_angle + 360 / 4 * i, length=_len, color=_color)
 
 
-# point_0 = sd.get_point(400, 200)
-# square_2(point_0, 0, 80)
 
 
-def pentagon_2(_point, _angle, _len):
+
+def pentagon_2(_point, _angle, _len, _color):
     next_point = _point
     for i in range(5):
-        next_point = figure(start=next_point, angle=_angle + 360 / 5 * i, length=_len)
+        next_point = figure(start=next_point, angle=_angle + 360 / 5 * i, length=_len, color= _color)
 
 
 # point_0 = sd.get_point(400, 300)
 # pentagon_2(point_0, 0, 80)
 
 
-def octagon_2(_point, _angle, _len):
+def octagon_2(_point, _angle, _len, _color):
     next_point = _point
     for i in range(6):
-        next_point = figure(start=next_point, angle=_angle + 360 / 6 * i, length=_len)
+        next_point = figure(start=next_point, angle=_angle + 360 / 6 * i, length=_len, color=_color)
 
 
 # point_0 = sd.get_point(400, 500)
@@ -86,9 +65,22 @@ for i, item in colors_name.items():
 color_vibor = int(input())
 print(color_vibor)
 
-if (color_vibor == 7):
-    print("маленький расист")
-if not (1 <= color_vibor <= 7):
-    print("попросил оценить от 1 до 7 чел пишет 12")
 
+if (1 <= color_vibor <= 7):
+    _color = colors[color_vibor]
+    print(f"Ты выбрал {colors_name[color_vibor]} - {colors[color_vibor]}")
+    if (color_vibor == 7):
+        print("маленький расист")
+
+    else:
+             print("попросил оценить от 1 до 7 чел пишет 12")
+
+point_0 = sd.get_point(400, 100)
+triangle_2(point_0, 0, 80,  _color)
+point_0 = sd.get_point(400,  500)
+octagon_2(point_0, 0, 80, _color)
+point_0 = sd.get_point(400, 200)
+square_2(point_0, 0, 80,  _color)
+point_0 = sd.get_point(400, 300)
+pentagon_2(point_0, 0, 80, _color)
 sd.pause()
