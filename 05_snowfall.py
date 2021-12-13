@@ -1,31 +1,38 @@
 # -*- coding: utf-8 -*-
 
 import simple_draw as sd
+import random as r
 
-# На основе кода из практической части реализовать снегопад:
-# - создать списки данных для отрисовки N снежинок
-# - нарисовать падение этих N снежинок
-# - создать список рандомных длинн лучей снежинок (от 10 до 100) и пусть все снежинки будут разные
-
+x = 1000
+y = 1000
+sd.resolution = (x, y)
 N = 20
+snowflakes = []
 
-# Пригодятся функции
-# sd.get_point()
-# sd.snowflake()
-# sd.sleep()
-# sd.random_number()
-# sd.user_want_exit()
+for _ in range(N):
+    snowflakes.append([r.randint(0, x), r.randint(y - 100, y + 250), r.randint(10, 100), True])
 
-# TODO здесь ваш код
-while True:
-    sd.clear_screen()
-    pass
-    pass
-    pass
-    sd.sleep(0.1)
-    if sd.user_want_exit():
-        break
 
+def padenie(snowflak2):
+    while True:
+        sd.clear_screen()
+        for snowflake in snowflak2:
+            point = sd.get_point(snowflake[0], snowflake[1])
+            sd.snowflake(center=point, length=snowflake[2], color=sd.COLOR_WHITE)
+            if snowflake[3]:
+                if snowflake[1] <= 0:
+                    snowflake[1] = 0
+                    snowflake[3] = False
+                    snowflakes.append([r.randint(0, x), r.randint(y - 100, y + 250), r.randint(10, 100), True])
+                else:
+                    snowflake[1] -= 15
+                    snowflake[0] += r.randint(-15, 15)
+        sd.sleep(0.05)
+        if sd.user_want_exit():
+            break
+
+
+padenie(snowflakes)
 sd.pause()
 
 # подсказка! для ускорения отрисовки можно
