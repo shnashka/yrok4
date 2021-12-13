@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import simple_draw as sd
-
+import random as r
 sd.resolution = (1000, 1000)
 
 
@@ -18,37 +18,37 @@ sd.resolution = (1000, 1000)
 # - вызывать саму себя 2 раза из точек-концов нарисованных ветвей,
 #   с параметром "угол рисования" равным углу только что нарисованной ветви,
 #   и параметром "длинна ветвей" в 0.75 меньшей чем длина только что нарисованной ветви
-def draw_branches(point, angle, length):
-    if length < 11:
-        return
-    else:
-        # angle_delta = 30
-        length_delta = .75
-        angle_l = angle - 30
-        angle_r = angle + 30
-        vetka11 = sd.get_vector(start_point=point, angle=angle_l, length=length, width=1)
-        vetka22 = sd.get_vector(start_point=point, angle=angle_r, length=length, width=1)
-        vetka11.draw()
-        vetka22.draw()
-
-        next_point = vetka11.end_point
-        next_length = length * length_delta
-        next_angle = angle_l - 30
-        draw_branches(point=next_point, angle=next_angle, length=next_length)
-        next_angle = angle_l + 30
-        draw_branches(point=next_point, angle=next_angle, length=next_length)
-
-        next_point = vetka22.end_point
-        next_length = length * length_delta
-        next_angle = angle_r - 30
-        draw_branches(point=next_point, angle=next_angle, length=next_length)
-        next_angle = angle_r + 30
-        draw_branches(point=next_point, angle=next_angle, length=next_length)
-
-
-root_point = sd.get_point(600, 303)
-draw_branches(point=root_point, angle=180
-              , length=100)
+# def draw_branches(point, angle, length):
+#     if length < 11:
+#         return
+#     else:
+#         # angle_delta = 30
+#         length_delta = .75
+#         angle_l = angle - 30
+#         angle_r = angle + 30
+#         vetka11 = sd.get_vector(start_point=point, angle=angle_l, length=length, width=1)
+#         vetka22 = sd.get_vector(start_point=point, angle=angle_r, length=length, width=1)
+#         vetka11.draw()
+#         vetka22.draw()
+#
+#         next_point = vetka11.end_point
+#         next_length = length * length_delta
+#         next_angle = angle_l - 30
+#         draw_branches(point=next_point, angle=next_angle, length=next_length)
+#         next_angle = angle_l + 30
+#         draw_branches(point=next_point, angle=next_angle, length=next_length)
+#
+#         next_point = vetka22.end_point
+#         next_length = length * length_delta
+#         next_angle = angle_r - 30
+#         draw_branches(point=next_point, angle=next_angle, length=next_length)
+#         next_angle = angle_r + 30
+#         draw_branches(point=next_point, angle=next_angle, length=next_length)
+#
+#
+# root_point = sd.get_point(600, 303)
+# draw_branches(point=root_point, angle=180
+#               , length=100)
 
 # 3) первоначальный вызов:
 # root_point = get_point(300, 30)
@@ -61,7 +61,39 @@ draw_branches(point=root_point, angle=180
 
 # можно поиграть -шрифтами- цветами и углами отклонения
 
-# TODO здесь ваш код
+def draw_branches(point, angle, length):
+    if length < 11:
+        return
+    else:
+        # angle_delta = 30
+        angle_delta = r.randint(15, 45)
+        length_delta = r.uniform(0.6, 0.9)
+        angle_l = angle - angle_delta
+        angle_r = angle + angle_delta
+        vetka11 = sd.get_vector(start_point=point, angle=angle_l, length=length, width=1)
+        vetka22 = sd.get_vector(start_point=point, angle=angle_r, length=length, width=1)
+        vetka11.draw()
+        vetka22.draw()
+
+        next_point = vetka11.end_point
+        next_length = length * length_delta
+        next_angle = angle_l - r.randint(15, 45)
+        draw_branches(point=next_point, angle=next_angle, length=next_length)
+        next_angle = angle_l + r.randint(15, 45)
+        draw_branches(point=next_point, angle=next_angle, length=next_length)
+
+        next_point = vetka22.end_point
+        next_length = length * length_delta
+        next_angle = angle_r - r.randint(15, 45)
+        draw_branches(point=next_point, angle=next_angle, length=next_length)
+        next_angle = angle_r + r.randint(15, 45)
+        draw_branches(point=next_point, angle=next_angle, length=next_length)
+
+
+root_point = sd.get_point(600, 303)
+draw_branches(point=root_point, angle=180
+              , length=100)
+
 
 # 4) Усложненное задание (делать по желанию)
 # - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
